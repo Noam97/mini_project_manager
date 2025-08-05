@@ -69,3 +69,10 @@ CORS is configured to allow requests from the frontend (http://localhost:3001).
  Add tasks per project
 
 
+
+ <img width="1906" height="727" alt="image" src="https://github.com/user-attachments/assets/2f08dc7d-6fc8-4fc4-8f62-19b61d912c6b" />
+ <img width="1906" height="727" alt="image" src="https://github.com/user-attachments/assets/d512e418-ee8f-47fa-b07e-8ed83257ab21" />
+
+
+
+
