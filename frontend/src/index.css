@@ -11,24 +11,6 @@ main {
   padding: 20px;
 }
 
-
-/* .auth-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-} */
-
-/* .auth-input {
-  width: 100%;
-  max-width: 320px;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  transition: border-color 0.3s ease;
-} */
-
 .auth-input:focus {
   border-color: #0077cc;
   outline: none;
@@ -63,8 +45,8 @@ main {
 }
 
 .auth-page {
-    min-height: 100vh; 
-     padding: 70px 0;
+  min-height: 100vh;
+  padding: 70px 0;
 }
 
 .auth-form,
@@ -107,10 +89,63 @@ button:hover {
 
 .delete-button {
   background-color: #e05353;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .delete-button:hover {
   background-color: #c13f3f;
+}
+
+.task-form {
+  position: relative;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 1rem;
+  background-color: #fff;
+}
+
+.close-btn {
+  position: absolute;
+  top: -0.6rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #d22020;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.task-form-inline {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .error {

@@ -36,6 +36,7 @@ const ProjectDetailsPage: React.FC = () => {
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
   const [editTitle, setEditTitle] = useState('');
   const [editDueDate, setEditDueDate] = useState('');
+  const [showTaskForm, setShowTaskForm] = useState(false);
 
   useEffect(() => {
     if (token && id) {
@@ -56,6 +57,7 @@ const ProjectDetailsPage: React.FC = () => {
     e.preventDefault();
     if (!taskTitle.trim()) {
       setError('Task title is required');
+      setShowTaskForm(false);
       return;
     }
     try {
@@ -66,6 +68,7 @@ const ProjectDetailsPage: React.FC = () => {
       setProject((prev) => prev && { ...prev, tasks: [...prev.tasks, newTask] });
       setTaskTitle('');
       setTaskDueDate('');
+      setShowTaskForm(false);
     } catch (err: any) {
       setError(err.message);
     }
@@ -142,28 +145,59 @@ const ProjectDetailsPage: React.FC = () => {
     <div className="project-details-container">
       <header className="project-header">
         <button onClick={() => navigate('/')}>{'←'} Back</button>
-        <h2>{project.title}</h2>
         <button className="delete-button" onClick={handleDeleteProject}>Delete Project</button>
       </header>
+      <h2>{project.title}</h2>
+
       {project.description && <p>{project.description}</p>}
       {error && <p className="error">{error}</p>}
+
       <section className="task-section">
-        <h3>Tasks</h3>
-        <form onSubmit={handleAddTask} className="task-form">
-          <input
-            type="text"
-            placeholder="Task title"
-            value={taskTitle}
-            onChange={(e) => setTaskTitle(e.target.value)}
-            required
-          />
-          <input
-            type="date"
-            value={taskDueDate}
-            onChange={(e) => setTaskDueDate(e.target.value)}
-          />
-          <button type="submit">Add Task</button>
-        </form>
+        <div
+          className="task-header"
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: '1rem',
+            flexWrap: 'wrap'
+          }}
+        >
+          <h3 style={{ margin: 0 }}>Tasks</h3>
+          {!showTaskForm ? (
+            <button className="add-task-button" onClick={() => setShowTaskForm(true)}>
+              + Add Task
+            </button>
+          ) : (
+            <form onSubmit={handleAddTask} style={{ display: 'flex', gap: '0.5rem' }}>
+              <input
+                type="text"
+                placeholder="Task title"
+                value={taskTitle}
+                onChange={(e) => setTaskTitle(e.target.value)}
+                required
+              />
+              <input
+                type="date"
+                value={taskDueDate}
+                onChange={(e) => setTaskDueDate(e.target.value)}
+              />
+              <button type="submit">Create</button>
+              <button
+                type="button"
+                className="close-btn"
+                onClick={() => {
+                  setShowTaskForm(false);
+                  setTaskTitle('');
+                  setTaskDueDate('');
+                }}
+              >
+                ×
+              </button>
+            </form>
+          )}
+        </div>
+
         <ul className="task-list">
           {project.tasks.map((task) => (
             <li key={task.id} className="task-item">
