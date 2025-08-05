@@ -32,17 +32,20 @@ Full-stack application for managing projects and tasks, featuring:
 ## Setup Instructions
 
 ### Backend
-cd backend
-dotnet restore
-dotnet run
+-cd backend
+-dotnet restore
+-dotnet run
 
 By default, runs on: http://localhost:5000
 
+**Note:** Default JWT secret is hardcoded for demo purposes. In production, store it securely (e.g., via environment variables).
+
+
 
 ### Fronted
-cd frontend
-npm install
-npm run dev
+-cd frontend
+-npm install
+-npm run dev
 
 By default, runs on: http://localhost:3001
 
@@ -65,6 +68,4 @@ CORS is configured to allow requests from the frontend (http://localhost:3001).
 
  Add tasks per project
 
-**Note:** 
-Default JWT secret is hardcoded for demo purposes. In production, store it securely (e.g., via environment variables).
 
