@@ -23,23 +23,25 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="auth-container">
-      <h2>Login</h2>
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={handleSubmit} className="auth-form">
-        <label>
-          Username
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
-        </label>
-        <label>
-          Password
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </label>
-        <button type="submit">Login</button>
-      </form>
-      <p>
-        Don't have an account? <Link to="/register">Register</Link>
-      </p>
+    <div className="auth-page">
+      <div className="auth-container">
+        <h2>Login</h2>
+        {error && <p className="error">{error}</p>}
+        <form onSubmit={handleSubmit} className="auth-form">
+          <label>
+            Username
+            <input className="auth-input" type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+          </label>
+          <label>
+            Password
+            <input className="auth-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          </label>
+          <button  className="auth-button" type="submit">Login</button>
+        </form>
+        <p>
+          Don't have an account? <Link to="/register">Register</Link>
+        </p>
+      </div>
     </div>
   );
 };

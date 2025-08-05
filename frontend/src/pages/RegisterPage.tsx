@@ -28,28 +28,30 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="auth-container">
-      <h2>Register</h2>
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={handleSubmit} className="auth-form">
-        <label>
-          Username
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
-        </label>
-        <label>
-          Password
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </label>
-        <label>
-          Confirm Password
-          <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
-        </label>
-        <button type="submit">Register</button>
-      </form>
-      <p>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
-    </div>
+    <div className="auth-page">
+  <div className="auth-container">
+        <h2>Register</h2>
+        {error && <p className="error">{error}</p>}
+        <form onSubmit={handleSubmit} className="auth-form">
+          <label>
+            Username
+            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+          </label>
+          <label>
+            Password
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          </label>
+          <label>
+            Confirm Password
+            <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+          </label>
+          <button className="auth-button" type="submit">Register</button>
+        </form>
+        <p>
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
+      </div>
+      </div>
   );
 };
 
