@@ -3,11 +3,21 @@ const BASE_URL = 'http://localhost:5000';
 async function handleResponse(response: Response) {
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
+
+    if (error.errors && typeof error.errors === 'object') {
+      const messages = Object.values(error.errors)
+        .flat()
+        .join(' ');
+      throw new Error(messages);
+    }
+
     const message = error.message || response.statusText;
     throw new Error(message);
   }
+
   return response.json();
 }
+
 
 export async function register(username: string, password: string, confirmPassword: string) {
   const res = await fetch(`${BASE_URL}/api/auth/register`, {

@@ -10,6 +10,8 @@ const RegisterPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [fieldErrors, setFieldErrors] = useState<{ [key: string]: string }>({});
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,35 +25,58 @@ const RegisterPage: React.FC = () => {
       login(response.token);
       navigate('/');
     } catch (err: any) {
-      setError(err.message || 'Registration failed');
+      const rawMessage = err.message || 'Registration failed';
+      const errors: { [key: string]: string } = {};
+
+      if (rawMessage.includes('Password')) {
+        errors.password = rawMessage.match(/The field Password.*?\./)?.[0] || 'Invalid password';
+      }
+      if (rawMessage.includes('Username')) {
+        errors.username = rawMessage.match(/The field Username.*?\./)?.[0] || 'Invalid username';
+      }
+
+      if (!Object.keys(errors).length) {
+        errors.general = rawMessage;
+      }
+
+      setFieldErrors(errors);
     }
+
   };
 
   return (
     <div className="auth-page">
-  <div className="auth-container">
+      <div className="auth-container">
         <h2>Register</h2>
         {error && <p className="error">{error}</p>}
+        {fieldErrors.general && <p className="error">{fieldErrors.general}</p>}
+
         <form onSubmit={handleSubmit} className="auth-form">
           <label>
             Username
             <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+            {fieldErrors.username && <p className="error">{fieldErrors.username}</p>}
           </label>
+
           <label>
             Password
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            {fieldErrors.password && <p className="error">{fieldErrors.password}</p>}
           </label>
+
           <label>
             Confirm Password
             <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+            {fieldErrors.confirmPassword && <p className="error">{fieldErrors.confirmPassword}</p>}
           </label>
+
           <button className="auth-button" type="submit">Register</button>
         </form>
         <p>
           Already have an account? <Link to="/login">Login</Link>
         </p>
       </div>
-      </div>
+    </div>
   );
 };
 
