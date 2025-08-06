@@ -15,7 +15,7 @@ builder.Services.AddCors(options =>
     {
         policy
             .WithOrigins("http://localhost:3000",
-             "https://mini-project-manager-livid.vercel.app"
+             "https://mini-project-manager-xggr.vercel.app"
             )
             .AllowAnyHeader()
             .AllowAnyMethod()
