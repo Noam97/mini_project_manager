@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { filterTasks, TaskStatusFilter } from '../utils/FilterUtils';
+import { sortTasksByDate, SortOrder } from '../utils/SortUtils';
+
 import {
   getProject,
   createTask,
@@ -37,6 +40,8 @@ const ProjectDetailsPage: React.FC = () => {
   const [editTitle, setEditTitle] = useState('');
   const [editDueDate, setEditDueDate] = useState('');
   const [showTaskForm, setShowTaskForm] = useState(false);
+  const [statusFilter, setStatusFilter] = useState<TaskStatusFilter>('all');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
 
   useEffect(() => {
     if (token && id) {
@@ -141,6 +146,11 @@ const ProjectDetailsPage: React.FC = () => {
     return <div className="project-details-container">{error ? <p className="error">{error}</p> : <p>Loading...</p>}</div>;
   }
 
+  const displayedTasks = sortTasksByDate(
+    filterTasks(project.tasks, statusFilter),
+    sortOrder
+  );
+
   return (
     <div className="project-details-container">
       <header className="project-header">
@@ -159,11 +169,34 @@ const ProjectDetailsPage: React.FC = () => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            gap: '1rem',
-            flexWrap: 'wrap'
+            flexWrap: 'wrap',
+            gap: '1rem'
           }}
         >
           <h3 style={{ margin: 0 }}>Tasks</h3>
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            <label>
+              Filter:
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value as TaskStatusFilter)}
+              >
+                <option value="all">All</option>
+                <option value="completed">Completed</option>
+                <option value="incomplete">Incomplete</option>
+              </select>
+            </label>
+            <label>
+              Sort:
+              <select
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value as SortOrder)}
+              >
+                <option value="asc">Earliest first</option>
+                <option value="desc">Latest first</option>
+              </select>
+            </label>
+          </div>
           {!showTaskForm ? (
             <button className="add-task-button" onClick={() => setShowTaskForm(true)}>
               + Add Task
@@ -199,7 +232,7 @@ const ProjectDetailsPage: React.FC = () => {
         </div>
 
         <ul className="task-list">
-          {project.tasks.map((task) => (
+          {displayedTasks.map((task) => (
             <li key={task.id} className="task-item">
               {editingTaskId === task.id ? (
                 <div className="task-editing">
@@ -237,7 +270,7 @@ const ProjectDetailsPage: React.FC = () => {
               )}
             </li>
           ))}
-          {project.tasks.length === 0 && <p>No tasks yet. Create one above.</p>}
+          {displayedTasks.length === 0 && <p>No tasks yet. Create one above.</p>}
         </ul>
       </section>
     </div>
