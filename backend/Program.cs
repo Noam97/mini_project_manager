@@ -81,7 +81,7 @@ if (app.Environment.IsDevelopment())
 
 // Use CORS before authentication
 app.UseCors();
-app.UseCors(corsPolicyName);
+// app.UseCors(corsPolicyName);
 
 
 app.UseAuthentication();

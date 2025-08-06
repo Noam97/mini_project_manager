@@ -1,5 +1,5 @@
 // const BASE_URL = 'http://localhost:5000';
-"https://miniprojectmanager-production.up.railway.app";
+const BASE_URL = "https://miniprojectmanager-production.up.railway.app";
 
 async function handleResponse(response: Response) {
   if (!response.ok) {
