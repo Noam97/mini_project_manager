@@ -74,7 +74,20 @@ Form validation and error handling
 
 Store and reuse JWT for authenticated requests
 
+Loading indicators and user feedback
+
 Filter and sort tasks
+
+Mobile-friendly design
+
+
+## Deployment
+The deployed version of the project is available on the `deployment-version` branch.  
+You can view the deployed frontend here:  
+🔗 [https://mini-project-manager-livid.vercel.app/login](https://mini-project-manager-livid.vercel.app/login)
+
+Please note that this deployment is provided for demonstration purposes only, and may occasionally be unavailable or limited.  
+For a stable version of the code and to run the project locally, refer to the `main` branch.
 
 
 https://github.com/user-attachments/assets/ba2174ba-6f79-4875-88a8-05337ec5d3f5
