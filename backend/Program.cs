@@ -7,17 +7,20 @@ using MiniProjectManager.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var corsPolicyName = "FrontendPolicy";
+
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
+    options.AddPolicy(name: corsPolicyName, policy =>
     {
         policy
-            .WithOrigins("http://localhost:3001")
+            .WithOrigins("http://localhost:3000")
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowCredentials(); 
+            .AllowCredentials();
     });
 });
+
 
 
 // Add services to the container
@@ -76,6 +79,8 @@ if (app.Environment.IsDevelopment())
 
 // Use CORS before authentication
 app.UseCors();
+app.UseCors(corsPolicyName);
+
 
 app.UseAuthentication();
 app.UseAuthorization();
