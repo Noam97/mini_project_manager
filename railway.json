@@ -1,0 +1,8 @@
+{
+  "build": {
+    "command": "dotnet publish backend/MiniProjectManager.csproj -c Release -o /app/publish"
+  },
+  "start": {
+    "command": "dotnet /app/publish/MiniProjectManager.dll"
+  }
+}
