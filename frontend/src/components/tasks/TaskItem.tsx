@@ -27,8 +27,18 @@ const TaskItem: React.FC<TaskItemProps> = ({
       <small>Due {new Date(dueDate).toLocaleDateString()}</small>
     )}
     <div className="task-actions">
-      <button onClick={onEdit}>Edit</button>
-      <button className="delete-button" onClick={onDelete}>Delete</button>
+
+      <button onClick={onEdit} className="icon-button">
+        <img src="/src/assets/icons/edit.jpg" alt="Edit" width={20} height={20} />
+      </button>
+
+      {/* <button onClick={onEdit}>Edit</button> */}
+
+
+      <button onClick={onDelete} className="icon-button">
+        <img src="/src/assets/icons/delete.jpg" alt="Delete" width={20} height={20} />
+      </button>
+      {/* <button className="delete-button" onClick={onDelete}>Delete</button> */}
     </div>
   </div>
 );

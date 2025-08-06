@@ -66,7 +66,7 @@ const DashboardPage: React.FC = () => {
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
-        <h2>Your Projects</h2>
+        <h2>Add Project</h2>
         <button onClick={logout}>Logout</button>
       </header>
       {error && <p className="error">{error}</p>}
@@ -87,6 +87,9 @@ const DashboardPage: React.FC = () => {
         <button type="submit">Add Project</button>
       </form>
       <ul className="project-list">
+        <br></br>
+        <h2>Your Projects</h2>
+
         {projects.map((project) => (
           <li key={project.id} className="project-item">
             <div className="project-info" onClick={() => navigate(`/projects/${project.id}`)}>
@@ -94,7 +97,12 @@ const DashboardPage: React.FC = () => {
               {project.description && <p>{project.description}</p>}
               <small>Created {new Date(project.createdAt).toLocaleString()}</small>
             </div>
-            <button className="delete-button" onClick={() => handleDelete(project.id)}>Delete</button>
+
+              <button onClick={() => handleDelete(project.id)} className="icon-button">
+        <img src="/src/assets/icons/delete.jpg"  alt="Delete" width={20} height={20} />
+      </button>
+
+            {/* <button className="delete-button" onClick={() => handleDelete(project.id)}>Delete</button> */}
           </li>
         ))}
         {projects.length === 0 && <p>No projects yet. Create one above.</p>}

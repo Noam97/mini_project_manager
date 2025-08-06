@@ -8,7 +8,6 @@ import { filterTasks, TaskStatusFilter } from '../utils/FilterUtils';
 import { sortTasksByDate, SortOrder } from '../utils/SortUtils';
 import '@/styles/project.css';
 import "@/styles/task.css";
-// import '../styles/error.css';
 
 
 const ProjectDetailsPage: React.FC = () => {
@@ -76,7 +75,7 @@ const ProjectDetailsPage: React.FC = () => {
       <header className="project-header">
         <button onClick={() => navigate('/')}>{'←'} Back</button>
         <button className="delete-button" onClick={handleDeleteProject}>
-          Delete Project
+          Delete <br></br> Project
         </button>
       </header>
 
