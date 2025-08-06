@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createProject, deleteProject, getProjects } from '../api';
 import { useAuth } from '../contexts/AuthContext';
+import '@/styles/dashboard.css';
+import '@/styles/project.css';
+
 
 interface Project {
   id: number;

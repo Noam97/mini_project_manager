@@ -1,0 +1,67 @@
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.task-view {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.task-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 5px;
+}
+
+.task-editing {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.task-form {
+  position: relative;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 1rem;
+  background-color: #fff;
+}
+
+.task-form-inline {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.close-btn {
+  position: absolute;
+  top: -0.6rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #d22020;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.close-btn:hover {
+  color: #000;
+}

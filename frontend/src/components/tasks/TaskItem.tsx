@@ -1,4 +1,6 @@
 import React from 'react';
+import '@/styles/task.css';
+
 
 export interface TaskItemProps {
   id: number;

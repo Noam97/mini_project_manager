@@ -5,6 +5,8 @@ import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import ProjectDetailsPage from './pages/ProjectDetailsPage';
 import { useAuth } from './contexts/AuthContext';
+import './styles/base.css';
+
 
 const App: React.FC = () => {
   const { token } = useAuth();

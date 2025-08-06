@@ -1,0 +1,21 @@
+.auth-input:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+
+.auth-button {
+  background-color: #054a7c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: 400;
+  font-size: 17px;
+  margin-top: 16px;
+}
+
+.auth-button:hover {
+  background-color: #005fa3;
+  transform: scale(1.02);
+}

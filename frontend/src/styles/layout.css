@@ -1,0 +1,26 @@
+.auth-container,
+.dashboard-container,
+.project-details-container {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.auth-page {
+  min-height: 100vh;
+  padding: 70px 0;
+}
+
+.project-header,
+.dashboard-header,
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}

@@ -1,0 +1,33 @@
+.project-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.project-info {
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.project-info h3 {
+  margin: 0 0 4px;
+}
+
+.project-info p {
+  margin: 0 0 4px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.project-info small {
+  font-size: 0.8rem;
+  color: #888;
+}

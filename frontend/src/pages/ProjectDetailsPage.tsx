@@ -6,6 +6,10 @@ import TaskForm from '../components/tasks/TaskForm';
 import TaskItem from '../components/tasks/TaskItem';
 import { filterTasks, TaskStatusFilter } from '../utils/FilterUtils';
 import { sortTasksByDate, SortOrder } from '../utils/SortUtils';
+import '@/styles/project.css';
+import "@/styles/task.css";
+// import '../styles/error.css';
+
 
 const ProjectDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
