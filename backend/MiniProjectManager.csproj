@@ -9,12 +9,12 @@
 
   <ItemGroup>
     <!-- JWT authentication support -->
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
     <!-- Entity Framework Core providers. We swap to SQLite to persist data locally. -->
     <!-- Removed the in‑memory provider so the application uses SQLite instead. -->
     <!--<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0" />-->
     <!-- Include the SQLite provider. This package allows Entity Framework Core to target SQLite databases. -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <!-- Data annotations for model validation -->
   </ItemGroup>
