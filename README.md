@@ -47,7 +47,7 @@ By default, runs on: http://localhost:5000
 -npm install
 -npm run dev
 
-By default, runs on: http://localhost:3001
+By default, runs on: http://localhost:3000
 
 
 ## Authentication
@@ -56,7 +56,7 @@ Registration and login return a JWT token.
 
 The token is stored in localStorage and included in Authorization headers for protected routes.
 
-CORS is configured to allow requests from the frontend (http://localhost:3001).
+CORS is configured to allow requests from the frontend (http://localhost:3000).
 
 
 
