@@ -84,7 +84,7 @@ However, the project was originally developed with .NET 8.0, and it fully suppor
 
 To use .NET 8.0 locally, simply update the TargetFramework and package versions in MiniProjectManager.csproj accordingly.
 
-link: [https://mini-project-manager-livid.vercel.app/register](https://mini-project-manager-livid.vercel.app/)
+link: https://mini-project-manager-livid.vercel.app
 
 
 https://github.com/user-attachments/assets/ba2174ba-6f79-4875-88a8-05337ec5d3f5
