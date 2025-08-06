@@ -15,13 +15,11 @@ const TaskForm: React.FC<TaskFormProps> = ({
   onTitleChange,
   onDueDateChange,
   onSubmit,
-  onCancel
+  onCancel,
 }) => {
   return (
     <form onSubmit={(e) => { e.preventDefault(); onSubmit(); }} className="task-form">
-      <button type="button" className="close-btn" onClick={onCancel}>
-        ×
-      </button>
+      <button type="button" className="close-btn" onClick={onCancel}>×</button>
       <input
         type="text"
         placeholder="Task title"

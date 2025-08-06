@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useProject } from '../hooks/useProject';
 import TaskForm from '../components/tasks/TaskForm';
-import TaskList from '../components/tasks/TaskList';
+import TaskItem from '../components/tasks/TaskItem';
 import { filterTasks, TaskStatusFilter } from '../utils/FilterUtils';
 import { sortTasksByDate, SortOrder } from '../utils/SortUtils';
 
@@ -17,9 +17,20 @@ const ProjectDetailsPage: React.FC = () => {
   const [statusFilter, setStatusFilter] = useState<TaskStatusFilter>('all');
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
 
+  const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
+  const [editTitle, setEditTitle] = useState('');
+  const [editDueDate, setEditDueDate] = useState('');
+
   const projectId = id ? parseInt(id, 10) : 0;
-  const { project, error, loading, createTask, updateTask, deleteTask, deleteProject } =
-    useProject(projectId, token || '');
+  const {
+    project,
+    loading,
+    error,
+    createTask,
+    updateTask,
+    deleteTask,
+    deleteProject,
+  } = useProject(projectId, token || '');
 
   const handleAddTask = async () => {
     await createTask({ title: taskTitle, dueDate: taskDueDate || null });
@@ -31,6 +42,23 @@ const ProjectDetailsPage: React.FC = () => {
   const displayedTasks = project
     ? sortTasksByDate(filterTasks(project.tasks, statusFilter), sortOrder)
     : [];
+
+  const handleToggleCompletion = async (taskId: number, current: boolean) => {
+    await updateTask(taskId, { isCompleted: !current });
+  };
+
+  const startEditing = (taskId: number, title: string, dueDate: string | null) => {
+    setEditingTaskId(taskId);
+    setEditTitle(title);
+    setEditDueDate(dueDate ? dueDate.slice(0, 10) : '');
+  };
+
+  const handleSaveEdit = async (taskId: number) => {
+    await updateTask(taskId, { title: editTitle, dueDate: editDueDate || null });
+    setEditingTaskId(null);
+    setEditTitle('');
+    setEditDueDate('');
+  };
 
   const handleDeleteProject = async () => {
     if (!project) return;
@@ -62,11 +90,10 @@ const ProjectDetailsPage: React.FC = () => {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                marginBottom: '1rem'
+                marginBottom: '1rem',
               }}
             >
               <h3 style={{ margin: 0 }}>Tasks</h3>
-
               {!showTaskForm && (
                 <button className="add-task-button" onClick={() => setShowTaskForm(true)}>
                   + Add Task
@@ -89,8 +116,10 @@ const ProjectDetailsPage: React.FC = () => {
               />
             )}
 
-            {/* controls for filter & sort */}
-            <div className="task-controls" style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+            <div
+              className="task-controls"
+              style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}
+            >
               <label>
                 Filter:
                 <select
@@ -114,24 +143,39 @@ const ProjectDetailsPage: React.FC = () => {
               </label>
             </div>
 
-            <TaskList
-              tasks={displayedTasks.map((t) => ({
-                id: t.id,
-                title: t.title,
-                dueDate: t.dueDate,
-                isCompleted: t.isCompleted,
-                onToggle: () => updateTask(t.id, { isCompleted: !t.isCompleted }),
-                onEdit: () => {
-                  // open edit mode (implementation left for brevity)
-                },
-                onDelete: () => deleteTask(t.id)
-              }))}
-              onToggle={(taskId) => updateTask(taskId, {})}
-              onEdit={(taskId) => {
-                /* implement editing if needed */
-              }}
-              onDelete={(taskId) => deleteTask(taskId)}
-            />
+            <ul className="task-list">
+              {displayedTasks.map((task) => (
+                <li key={task.id} className="task-item">
+                  {editingTaskId === task.id ? (
+                    <div className="task-editing">
+                      <input
+                        type="text"
+                        value={editTitle}
+                        onChange={(e) => setEditTitle(e.target.value)}
+                      />
+                      <input
+                        type="date"
+                        value={editDueDate}
+                        onChange={(e) => setEditDueDate(e.target.value)}
+                      />
+                      <button onClick={() => handleSaveEdit(task.id)}>Save</button>
+                      <button onClick={() => setEditingTaskId(null)}>Cancel</button>
+                    </div>
+                  ) : (
+                    <TaskItem
+                      id={task.id}
+                      title={task.title}
+                      dueDate={task.dueDate}
+                      isCompleted={task.isCompleted}
+                      onToggle={() => handleToggleCompletion(task.id, task.isCompleted)}
+                      onDelete={() => deleteTask(task.id)}
+                      onEdit={() => startEditing(task.id, task.title, task.dueDate || null)}
+                    />
+                  )}
+                </li>
+              ))}
+              {displayedTasks.length === 0 && <p>No tasks yet. Create one above.</p>}
+            </ul>
           </section>
         </>
       )}

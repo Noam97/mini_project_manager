@@ -4,7 +4,7 @@ import {
   createTaskApi,
   updateTaskApi,
   deleteTaskApi,
-  deleteProjectApi
+  deleteProjectApi,
 } from '../services/projectApi';
 
 export interface TaskItem {
@@ -29,7 +29,7 @@ export function useProject(projectId: number, token: string) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!token) return;
+    if (!token || !projectId) return;
     setLoading(true);
     fetchProject(token, projectId)
       .then((data) => setProject(data))
@@ -47,14 +47,14 @@ export function useProject(projectId: number, token: string) {
 
   const updateTask = async (
     taskId: number,
-    data: { title?: string; dueDate?: string | null; isCompleted?: boolean }
+    updates: { title?: string; dueDate?: string | null; isCompleted?: boolean }
   ) => {
-    const updated = await updateTaskApi(token, taskId, data);
+    const updated = await updateTaskApi(token, taskId, updates);
     setProject((prev) =>
       prev
         ? {
             ...prev,
-            tasks: prev.tasks.map((t) => (t.id === taskId ? updated : t))
+            tasks: prev.tasks.map((t) => (t.id === taskId ? updated : t)),
           }
         : prev
     );
@@ -66,7 +66,7 @@ export function useProject(projectId: number, token: string) {
       prev
         ? {
             ...prev,
-            tasks: prev.tasks.filter((t) => t.id !== taskId)
+            tasks: prev.tasks.filter((t) => t.id !== taskId),
           }
         : prev
     );
@@ -75,15 +75,8 @@ export function useProject(projectId: number, token: string) {
   const deleteProject = async () => {
     if (!project) return;
     await deleteProjectApi(token, project.id);
+    setProject(null);
   };
 
-  return {
-    project,
-    loading,
-    error,
-    createTask,
-    updateTask,
-    deleteTask,
-    deleteProject
-  };
+  return { project, loading, error, createTask, updateTask, deleteTask, deleteProject };
 }
