@@ -8,7 +8,7 @@ export interface TaskCreateData {
 export interface TaskUpdateData {
   title?: string;
   dueDate?: string | null;
-  isCompleted?: boolean; // ← חשוב לשמור את השם הזה
+  isCompleted?: boolean;
 }
 
 export async function fetchProject(token: string, projectId: number) {
