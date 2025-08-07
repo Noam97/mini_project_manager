@@ -16,6 +16,7 @@
     <!-- Include the SQLite provider. This package allows Entity Framework Core to target SQLite databases. -->
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="DotNetEnv" Version="3.0.0" />
     <!-- Data annotations for model validation -->
   </ItemGroup>
 

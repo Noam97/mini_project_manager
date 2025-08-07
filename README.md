@@ -81,10 +81,19 @@ Filter and sort tasks
 Mobile-friendly design
 
 
+## Environment Variables
+
+This project uses environment variables for configuration.
+
+A template file is provided: `.env.example` for the backend and for the fronted.
+To get started, copy it and rename to `.env`:
+
+
+
 ## Deployment
 The deployed version of the project is available on the `deployment-version` branch.  
 You can view the deployed frontend here:  
-🔗 [https://mini-project-manager-livid.vercel.app/login](https://mini-project-manager-livid.vercel.app/login)
+🔗 [https://mini-project-manager-livid.vercel.app](https://mini-project-manager-livid.vercel.app)
 
 Please note that this deployment is provided for demonstration purposes only, and may occasionally be unavailable or limited.  
 For a stable version of the code and to run the project locally, refer to the `main` branch.

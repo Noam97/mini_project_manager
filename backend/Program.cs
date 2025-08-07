@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MiniProjectManager.Data;
 using MiniProjectManager.Services;
+DotNetEnv.Env.Load();
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,7 +44,7 @@ builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 
 // Configure JWT Authentication
-var jwtSecret = "Yb39!n#A8gfTqvL4KdZ82pVxMnW73RjCqHfZt!XvLd3sWq@L9KgJ1hXcLpQrXn28"; // 64 תווים
+var jwtSecret = builder.Configuration["JWT_SECRET"];
 var key = Encoding.UTF8.GetBytes(jwtSecret);
 builder.Services.Configure<MiniProjectManager.Settings.JwtSettings>(options =>
 {

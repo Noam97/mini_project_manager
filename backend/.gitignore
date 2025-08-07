@@ -4,4 +4,5 @@ obj/
 .vscode/
 *.db-shm
 *.db-wal
+.env
 
